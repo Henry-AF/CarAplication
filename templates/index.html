@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Loja de Carros</title>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header-section vh-100">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">UIXSHUVO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" style="justify-content: end;" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tour</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Package</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Book Trip</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-content text-center" style="margin-top: 15%;">
+            <h1>Experimente a Velocidade!</h1>
+            <p>Eleve o poder das suas viagens</p>
+            <a href="#" class="btn btn-primary">Comprar Agora</a>
+        </div>
+    </header>
+
+    <!-- Loja de Carros Section -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Loja de Carros</h1>
+        <div class="d-flex justify-content-center mb-3">
+            <a href="/create" class="btn btn-primary">Adicionar Produto</a>
+        </div>
+
+        <div class="row">
+            {% for produto in produtos %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ produto['imagem'] }}" class="card-img-top" alt="{{ produto['nome'] }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produto['nome'] }}</h5>
+                        <p class="card-text">Preço: R$ {{ produto['preco'] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
