@@ -1,28 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Loja de Carros</title>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('login-popup').style.display = 'block';
+        }, 3000); // 10 seconds
+    </script>
+    
+    <style>
+        #login-popup {
+            display: none;
+            /* Inicialmente oculto */
+            position: fixed;
+            /* Posicionamento fixo */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1C1C1C;
+            padding: 40px;
+            border-radius: 10px;
+            z-index: 9999;
+            /* Garante que a pop-up fique acima de outros elementos */
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Fundo escurecido */
+            display: none;
+            z-index: 9998;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .close-btn img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
+
 <body>
 
     {% block content %}
     {% endblock %}
     <!-- Header Section -->
-    <header class="header-section" style="background-color: #4F4F4F;">
+    <header class="header-section" style="height: 23.5rem; background-color: #4F4F4F;">
+
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" style="color: aliceblue;" href="#">UIXSHUVO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" style="justify-content: end;" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active"  style="color: aliceblue; font-weight: 500;" href="#">Sobre</a>
+                            <a class="nav-link active" style="color: aliceblue; font-weight: 500;" href="#">Sobre</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: aliceblue; font-weight: 500;" href="#">Carros</a>
@@ -39,12 +90,16 @@
                 <div class="row align-items-center">
                     <div class="col-md-6" style="color: azure;">
                         <h1 style="color: azure; font-weight: 200;">Experimente a Velocidade!</h1>
-                        <p style="font-weight: 200;">Eleve o poder das suas viagens. Tecnologia, design e performance em um só lugar. Descubra a nova geração de carros.
+                        <p style="font-weight: 200;">Eleve o poder das suas viagens. Tecnologia, design e performance em
+                            um só lugar. Descubra a nova geração de carros.
                         </p>
-                        <a href="#" style="background-color: #1C1C1C; color: aliceblue; padding: 10px 10px; border-radius: 5px; margin-top: 10px;">Comprar Agora</a>
+                        <a href="#"
+                            style="background-color: #1C1C1C; color: aliceblue; padding: 10px 10px; border-radius: 5px; margin-top: 10px;">Comprar
+                            Agora</a>
                     </div>
                     <div class="col-md-6">
-                        <img class="img-fluid" src="/static/image/pexels-mikebirdy-112460-removebg-preview.png" alt="" style="width: 80rem;">
+                        <img class="img-fluid" src="/static/image/pexels-mikebirdy-112460-removebg-preview.png" alt=""
+                            style="width: 80rem;">
                     </div>
                 </div>
             </div>
@@ -53,11 +108,13 @@
 
     <!-- Loja de Carros Section -->
     <div class="container mt-5" style="padding: 100px 0px;">
-        <h1 class="text-center mb-4">Loja de Carros</h1>
+        <h1 class="text-center mb-4" style="font-weight: 300;">Loja de Carros</h1>
         <div class="d-flex justify-content-center mb-3">
-            <a href="/create" class="btn btn-primary">Adicionar Produto</a>
+            <a href="/create"
+                style="background-color: #1C1C1C; color: aliceblue; padding: 10px 10px; border-radius: 5px; margin-bottom: 10px;">Adicionar
+                Produto</a>
         </div>
- 
+
         <div class="row">
             {% for produto in produtos %}
             <div class="col-md-4">
@@ -75,7 +132,55 @@
 
     {% include 'footer.html' %}
 
+
+    <div id="login-popup" style="display: none;">
+        <div class="container">
+            <div class="card-header">
+                <h2 style="color: aliceblue; font-weight: 300;">Cadastro de Usuário</h2>
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+                    <label for="email" style="color: aliceblue;">E-mail: </label>
+                    <input class="form-control" type="email" name="email" placeholder="email@exemplo.com" required>
+                    <label for="senha" style="color: aliceblue;">Senha: </label>
+                    <input class="form-control" type="senha" name="senha" placeholder="Digite sua senha" required>
+                    <button type="submit"
+                        style="background-color: white; padding: 10px; width: 100%; color: #1C1C1C; margin-top: 30px;">Cadastrar</button>
+                </form>
+            </div>
+            <button class="close-btn">
+                <img src="/static/image/multiply.png" alt="Fechar">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                document.getElementById('login-popup').style.display = 'block';
+                document.querySelector('.overlay').style.display = 'block';
+            }, 3000);
+
+            const closeBtn = document.querySelector('.close-btn');
+            const popup = document.getElementById('login-popup');
+            const overlay = document.querySelector('.overlay');
+
+            closeBtn.addEventListener('click', () => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+
+            overlay.addEventListener('click', () => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
+
 </html>
